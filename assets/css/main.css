@@ -3452,7 +3452,7 @@ input, select, textarea {
 						max-width: 100%;
 					}
 
-			#banner > .inner .content {
+			#banner > .inner .content { /** **/
 				display: -moz-flex;
 				display: -webkit-flex;
 				display: -ms-flex;
@@ -3462,6 +3462,7 @@ input, select, textarea {
 				-ms-align-items: center;
 				align-items: center;
 				margin: 0 0 2em 0;
+				font-size:1.2em !important;
 			}
 
 				#banner > .inner .content > * {
