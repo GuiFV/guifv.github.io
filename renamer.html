@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>IDETRA</title>
+		<title>File renamer</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>Project Manager</strong> <span>I.T - Product - Marketing</span></a>
+						<a href="index-en.html" class="logo"><strong>Guil's Portfolio</strong> <span>Project Manager and Code Developer: I.T - Product - Marketing</span></a>
 					</header>
 				<!-- Main -->
 					<div id="main" class="alt">
@@ -27,32 +27,92 @@
 							<section id="one">
 								<div class="inner">
 									<header class="major">
-										<h1>IDETRA</h1>
+										<h1>File renamer</h1>
 									</header>
 									<!-- element -->
 									<section id="two" class="spotlights">
 										<section>
 
 											<a class="image">
-												<img src="images/idetra_platform.png" alt="" data-position="center center" style="margin-top:2em; padding:2em;"/>
+												<img src="images/renamer.png" alt="" data-position="center center" style="margin-top:2em; padding:2em;"/>
 											</a>
 											<div class="content">
 												<div class="inner">
 													<header class="major">
-														<h3>Education and project management platform</h3>
+														<h3>My first Python script</h3>
 													</header>
-													<p>This is a personal project of mine. I created this platform to absorb volunteers willing to work on a good cause.
-														From the start it was a very complex platform that encompass explaining what the initiative is all about,
-														an education platform and a project management system. Completely build from scratch, I
-														used bootstrap on the front end and Django on the backend. I coded all the frontend and most of the core backend.
-														Eventually I had help to finish some of the more complex functionalities.
+													<p>I had a problem: every time my D90 Nikon had over 9999 pictures in the SD card, it would open a new folder
+														and place new pictures there starting from 0000. And I had much more than that per job taking pictures for an agency.
+														I had to streamline renaming the files to over 9999 so they could fit in one folder.
+														And renaming files is something computer should do. So I created a simple script that asks what character you want to
+														replace, in what position (in case it repeats itself), and replace it for what.
+														Now my pictures can start at the position 99.999 or more! And you can use it to any files you want.
+														Just remember: this was my very first real use case Python application.
 													</p>
-													<ul class="actions">
-														<li><a href="http://idetra.org" class="button" target="_blank">Visit platform</a></li>
-													</ul>
+
+
+
+
+
 												</div>
 											</div>
 										</section>
+
+
+										<pre><code># -*- coding: utf-8 -*-
+# o primeiro programa a gente nunca esquece....
+import os
+
+
+get_path =  os.getcwd()
+position = 0
+
+print "files found: \n"
+print "- " * 40
+for root, dirs, files in os.walk(get_path):
+    position = position + 1
+    print position, root
+
+print "- " * 40
+
+while True:
+
+    subfolder_name = raw_input("Type subfolder name (hit ENTER if already in it): ")
+
+    if (len(subfolder_name)<1):
+        folder = os.getcwd()
+    else:
+        folder = os.getcwd()+"/"+subfolder_name
+    try:
+        os.listdir(folder)
+        print "*"*40, "\n" "The folder is: ", folder, "\n","\n","and the files are: ", os.listdir(folder),'\n\n'
+        break
+    except:
+        print "\n\nInvalid name. Try again.\n\n"
+        continue
+
+
+what_to_cut = raw_input("What should I cut? ")
+start_cut_position = int(raw_input("What is the starting position of cut? 1, 2, 3... ?"))
+replace_for = raw_input("Replace for: ")
+content_folder = os.listdir(folder)
+
+print content_folder
+
+print start_cut_position
+
+for content_unit in content_folder:
+    folder_cut = content_unit.find(what_to_cut, start_cut_position)
+    replace_content = content_unit.replace(what_to_cut,replace_for,1)
+    old = folder+"/"+content_unit
+    new = folder+"/"+replace_content
+    print old, " NEW ", new
+    os.rename(old, new)
+    print content_unit
+</code></pre>
+
+
+
 								</div>
 							</section>
 
@@ -70,6 +130,15 @@
 									</ul>
 								</section>
 							</section>
+							<section class="split">
+								<section>
+									<ul class="icons" style="float:right;">
+										<li><a href="index-ptbr.html"><img src="images/Brazil.png" alt="" data-position="center center"/></a></li>
+										<li><a href="index-en.html"><img src="images/United-Kingdom.png" alt="" data-position="center center"/></a></li>
+									</ul>
+								</section>
+							</section>
+
 						</div>
 					</section>
 				<!-- Footer -->

@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Management migration</title>
+		<title>Renomeador de arquivos</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<a href="index-en.html" class="logo"><strong>Guil's Portfolio</strong> <span>Project Manager and Code Developer: I.T - Product - Marketing</span></a>
+						<a href="index-ptbr.html" class="logo"><strong>Portfólio: Guilherme</strong> <span>Gerente de Projetos e Desenvolvedor: T.I - Produto - Marketing</span></a>
 					</header>
 				<!-- Main -->
 					<div id="main" class="alt">
@@ -27,34 +27,87 @@
 							<section id="one">
 								<div class="inner">
 									<header class="major">
-										<h1>Management migration</h1>
+										<h1>Renomeador de arquivos</h1>
 									</header>
 									<!-- element -->
 									<section id="two" class="spotlights">
 										<section>
 
 											<a class="image">
-												<img src="images/esens.png" alt="" data-position="center center" style="margin-top:2em; padding:2em;"/>
+												<img src="images/renamer.png" alt="" data-position="center center" style="margin-top:2em; padding:2em;"/>
 											</a>
 											<div class="content">
 												<div class="inner">
 													<header class="major">
-														<h3>When spreadsheets work better than Trello</h3>
+														<h3>Meu primeiro script em Python</h3>
 													</header>
-													<p>I had the opportunity to work in Esens, a book summary app that was very successful abroad and was coming to Brazil.
-														The operation consisted in translators (from english to portuguese), people summarizing, voice actors recording
-														the summaries being read and uploading all this content properly formatted for the app every day. It was handed to me
-														as a Trello/Kanban style, and making 14 people move cards back and forth in a no-linear workflow was something I
-														knew it was not going to work. So I created 3 spreadsheets connect to each other. In the first I inserted the books and
-														templates, in the second one team worked on the text-side and studio worked on the recording side and the third was to help
-														the marketing team see what was being done and when it was being delivered. Another very proud moment in my career.
+													<p>Eu tinha um problema: toda vez que minha Nikon D90 tinha mais de 9999 fotos no cartão SD, ela abria uma nova pasta
+														e colocar as novas fotos lá a partir de 0000. E eu tinha muito mais do que isso por trabalho tirando fotos para uma agência.
+														Eu tinha que agilizar a renomeação dos arquivos para mais de 9999 para que eles pudessem caber em uma única pasta.
+														E renomear arquivos é algo que computadores devem fazer. Então, criei um script simples que pergunta qual caracter você deseja
+														substituir, em que posição (caso seja repetido), e substituir por qual.
+														Agora minhas fotos podem começar na posição 99.999 ou mais! E você pode usar este script para qualquer arquivo que desejar.
+														Lembre-se: este foi meu primeiro caso de uso real de aplicativo Python
 													</p>
-													<ul class="actions">
-														<li><a href="images/esens.png" class="button" target="_blank">Expand image</a></li>
-													</ul>
+
 												</div>
 											</div>
 										</section>
+
+
+										<pre><code># -*- coding: utf-8 -*-
+# o primeiro programa a gente nunca esquece....
+import os
+
+
+get_path =  os.getcwd()
+position = 0
+
+print "files found: \n"
+print "- " * 40
+for root, dirs, files in os.walk(get_path):
+    position = position + 1
+    print position, root
+
+print "- " * 40
+
+while True:
+
+    subfolder_name = raw_input("Type subfolder name (hit ENTER if already in it): ")
+
+    if (len(subfolder_name)<1):
+        folder = os.getcwd()
+    else:
+        folder = os.getcwd()+"/"+subfolder_name
+    try:
+        os.listdir(folder)
+        print "*"*40, "\n" "The folder is: ", folder, "\n","\n","and the files are: ", os.listdir(folder),'\n\n'
+        break
+    except:
+        print "\n\nInvalid name. Try again.\n\n"
+        continue
+
+
+what_to_cut = raw_input("What should I cut? ")
+start_cut_position = int(raw_input("What is the starting position of cut? 1, 2, 3... ?"))
+replace_for = raw_input("Replace for: ")
+content_folder = os.listdir(folder)
+
+print content_folder
+
+print start_cut_position
+
+for content_unit in content_folder:
+    folder_cut = content_unit.find(what_to_cut, start_cut_position)
+    replace_content = content_unit.replace(what_to_cut,replace_for,1)
+    old = folder+"/"+content_unit
+    new = folder+"/"+replace_content
+    print old, " NEW ", new
+    os.rename(old, new)
+    print content_unit
+</code></pre>
+
+
 								</div>
 							</section>
 
